@@ -8,29 +8,16 @@ function State() {
                 //we have to make changes in four places here in jsx so react matches those changes with
     //main dom and apply these  all changes into them.
          let [vari,setvari]=useState(10);   
-    let fun=()=>{
-  if(vari>=20){
-    setvari(
-    vari-10
-    )
-  }
-  else{
-  setvari(
-  vari+1
-  )
-  }
+    let fun=()=>{// actually setfunction it takes value in batches so first i will
+      //consider this is one time value after applying callback ,here basically setfunction take a callback as a parameter,so by using this and precounter
+      //value we can take previous counter value and increase into other,so i will increase 4 times
+  setvari(precounter=> precounter+1);
+  setvari(precounter=> precounter+1);
+  setvari(precounter=> precounter+1);
+  setvari(precounter=> precounter+1);
   }
   let funn=()=>{
-    if(vari<=1){
-      setvari(
-      vari+9
-      )
-    }
-    else{
-    setvari(
-    vari-1
-    )
-  }
+    setvari(vari-1);
    
   } 
 
