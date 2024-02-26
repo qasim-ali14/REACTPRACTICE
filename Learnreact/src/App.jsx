@@ -1,50 +1,17 @@
-
-import { useState } from "react";
 import "./App.css"
-function App() {//mostly react changes value and propagaate value in user interface.
-                //for that we used hook.
-                //it changes states in multiple places in UI.
-             let [vari,setvari]=useState(10);   
-let fun=()=>{
-  if(vari>=20){
-    setvari(
-    vari-10
-    )
-  }
-  else{
-  setvari(
-  vari+1
-  )
-  }
-  }
-  let funn=()=>{
-    if(vari<=1){
-      setvari(
-      vari+9
-      )
-    }
-    else{
-    setvari(
-    vari-1
-    )
-  }
-   
-  } 
+import Card from "./Component/Card"
+function App(){
+  return(
+    <>
+    <h2 className="bg-green-400 text-white p-6 size-19 mb-4" >   tailwind css</h2>
 
-  return (
-    <>//we have to make cha ges in four places here in jsx so react matches those changes with
-    //main dom and apply these  all changes into them.
-     <h2>chai with react {vari}</h2>
-     <button onClick={fun}> value:{vari}</button>
-     <br/>
+    <Card username="Qasim" btn="click me" />
+    <Card username="ALI" btn="visit me"/>
+    <Card username="SAJJAD" />//In card.jsx file we give default value in case if value not given then will be displayed.
     
-<button onClick={funn}>
-  decrement:{vari}
-  </button> 
-  <p> footer:{vari}</p>
-     </>
-  
-  )
-}
 
-export default App
+
+          </>
+  );
+}
+export default App;
