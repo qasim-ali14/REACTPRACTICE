@@ -34,6 +34,7 @@ function App() {
   useEffect(() => {
     passwordGenerator();
   }, [length, numAllowed, charAllowed, passwordGenerator]);
+  
 
   return (
     <div className="w-full h-screen duration-200">
