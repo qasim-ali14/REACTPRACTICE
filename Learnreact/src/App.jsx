@@ -46,18 +46,7 @@ const Home = () => (
             Your browser does not support the video tag.
           </video>
         </div>
-        <div className="relative h-[80vh] bg-black">
-          <video
-            className="w-full h-full object-cover"
-            controls
-            muted
-            poster="/images/image6.jpg"
-            preload="metadata"
-          >
-            <source src="/vedios/vedio2.webp" type="video/webp" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
+      
         <div>
           <img
             src="/images/image4.jpg"

@@ -27,10 +27,12 @@ const Herosection = () => {
             <span className="text-gray-600">تواصل معنا:</span>
             <br />
             <a
-              href="tel:+966312423523"
+              href="tel:+966 50 525 9019 "
               className="bg-green-600 text-white px-3  rounded hover:bg-green-700 transition"
             >
               📞 +٩٦٦ ٥٠ ٥٢٥ ٩٠١٩
+
+
             </a>
           </div>
 
