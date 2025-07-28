@@ -1,89 +1,136 @@
-import React from 'react';
+// File: Component/PropertyList.jsx
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const properties = [
   {
-    id: 1,
-    type: 'فلل للإيجار',
-    price: '65,000 ريال سعودي',
-    title: 'فيلا للإيجار في الرياض',
-    location: 'الرياض',
-    size: '400 sq Ft',
-    image: '/src/assets/image6.jpg',
-    status: 'للإيجار',
-    phone: '+966500000001',
-    email: 'info@realestatesaudi.com',
-    whatsapp: '966500000001'
+    id: 'villa-2',
+    title: 'فيلا للبيع بحديقة',
+    location: 'حي الجزيرة، الرياض',
+    area: '٤٨٤م في',
+    price: '١٩٨ الف',
+    for: 'sale',
+    images: [
+      '/images/image.jpg',
+      '/images/image2.jpg',
+      '/images/image3.jpg',
+      '/images/image4.jpg',
+      '/images/image5.jpg',
+    ],
   },
   {
-    id: 2,
-    type: 'فلل للإيجار',
-    price: '65,000 ريال سعودي',
-    title: 'فيلا للإيجار في الرياض',
-    location: 'الرياض',
-    size: '800 sq Ft',
-    image: '/src/assets/image4.jpg',
-    status: 'للإيجار',
-    phone: '+966500000002',
-    email: 'info@realestatesaudi.com',
-    whatsapp: '966500000002'
-  }
+    id: 'villa-3',
+    title: 'فيلا حديثة للإيجار',
+    location: ' حي الرائد، الرياض',
+    area: '1000م في ',
+    price: '180,000 ريال/سنوياً',
+    for: 'rent',
+    images: [
+      '/images/rent1.jpg',
+      '/images/rent2.jpg',
+      '/images/rent3.jpg',
+      '/images/rent4.jpg',
+      '/images/rent5.jpg',
+    ],
+  },
 ];
 
 const PropertyList = () => {
+  const [filter, setFilter] = useState('all');
+
+  const filteredProperties =
+    filter === 'all' ? properties : properties.filter((p) => p.for === filter);
+
   return (
-    <section className="px-4 py-10 text-center font-sans">
-      <h2 className="text-3xl font-bold text-blue-900 mb-2">
-        Latest Properties For Sale In <span className="text-indigo-600">Saudi</span>.
-      </h2>
-      <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-        Real Estate Saudi helps you find a home that suits your budget and lifestyle. From apartments, villas, townhouses to penthouses, we have got you covered!
-      </p>
+    <div className="py-10 bg-gray-50 text-right rtl">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl font-bold text-gray-800 mb-6">قائمة العقارات</h2>
 
-      <div className="mb-6 flex justify-center gap-2">
-        <button className="bg-indigo-600 text-white px-4 py-2 rounded">For Sale</button>
-        <button className="bg-gray-200 text-gray-700 px-4 py-2 rounded">Off Plan</button>
-        <button className="bg-gray-200 text-gray-700 px-4 py-2 rounded">For Rent</button>
-      </div>
+        <div className="flex justify-center gap-4 mb-8">
+          {['all', 'sale', 'rent'].map((type) => (
+            <button
+              key={type}
+              onClick={() => setFilter(type)}
+              className={`px-4 py-2 rounded ${
+                filter === type ? 'bg-blue-600 text-white' : 'bg-gray-200'
+              }`}
+            >
+              {type === 'all' ? 'الكل' : type === 'sale' ? 'للبيع' : 'للإيجار'}
+            </button>
+          ))}
+        </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        {properties.map((property) => (
-          <div key={property.id} className="border rounded-md shadow p-4">
-            <div className="relative">
-              <img src={property.image} alt={property.title} className="w-full h-60 object-cover rounded-md" />
-              <span className="absolute top-2 left-2 bg-black text-white text-xs px-2 py-1 rounded">
-                {property.status}
-              </span>
-            </div>
-            <div className="text-left mt-3">
-              <p className="text-sm text-gray-600">{property.type}</p>
-              <p className="text-orange-500 font-semibold">{property.price}</p>
-              <h3 className="text-lg font-semibold text-blue-900">{property.title}</h3>
-              <p className="text-sm text-gray-600">{property.location} • {property.size}</p>
-            </div>
-            <div className="mt-3 flex flex-col sm:flex-row gap-2">
-              <a href={`tel:${property.phone}`} className="bg-blue-900 text-white px-3 py-2 rounded w-full text-center">
-                📞 Call
-              </a>
-              <a href={`mailto:${property.email}`} className="bg-blue-900 text-white px-3 py-2 rounded w-full text-center">
-                📧 Email
-              </a>
-              <a
-                href={`https://wa.me/${property.whatsapp}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-blue-900 text-white px-3 py-2 rounded w-full text-center"
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredProperties.map((property) => (
+            <div
+              key={property.id}
+              className="bg-white rounded-xl shadow-md overflow-hidden"
+            >
+              <Swiper
+                spaceBetween={0}
+                slidesPerView={1}
+                navigation
+                pagination={{ clickable: true }}
+                modules={[Navigation, Pagination]}
+                className="h-64"
               >
-                💬 WhatsApp
-              </a>
-            </div>
-          </div>
-        ))}
-      </div>
+                {property.images.map((img, index) => (
+                  <SwiperSlide key={index}>
+                    <img
+                      src={img}
+                      alt={property.title}
+                      className="h-64 w-full object-cover"
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
 
-      <button className="mt-6 bg-orange-400 text-white px-6 py-2 rounded hover:bg-orange-500">
-        Load More
-      </button>
-    </section>
+              <div className="p-4">
+                <h3 className="text-xl font-semibold mb-2">{property.title}</h3>
+                <p className="text-gray-600">📍 {property.location}</p>
+                <p className="text-green-600 font-bold mt-2">💰 {property.price}</p>
+
+                <Link to={`/property/${property.id}`}>
+                  <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded w-full">
+                    تعرف أكثر
+                  </button>
+                </Link>
+
+                <div className="mt-4 flex flex-col gap-2">
+                  <a
+                    href="tel:+966505259019"
+                    className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded text-center"
+                  >
+                    📞 اتصل الآن
+                  </a>
+
+                  <a
+                    href="mailto:investor143@gmail.com"
+                    className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded text-center"
+                  >
+                    ✉️ أرسل بريد إلكتروني
+                  </a>
+
+                  <a
+                    href="https://wa.me/966505259019"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-lime-600 hover:bg-lime-700 text-white px-4 py-2 rounded text-center"
+                  >
+                    💬 تواصل عبر واتساب
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 
